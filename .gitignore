@@ -286,3 +286,6 @@ __pycache__/
 .DS_Store
 
 [Cc]overage/
+
+
+.credentials

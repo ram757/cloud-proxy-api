@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 const dotenv = require('dotenv');
-dotenv.config({ silent: true, path: 'env' });
-dotenv.config({ silent: true, path: 'dotcredentials' });
+dotenv.config({ silent: true, path: '.env' });
+dotenv.config({ silent: true, path: '.credentials' });
 
 const { app } = require('../server');
 const debug = require('debug')('cloud-api:server');
