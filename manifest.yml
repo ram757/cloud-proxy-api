@@ -1,0 +1,9 @@
+---
+env:
+  APP_NAME: HELLO_CLOUD
+applications:
+- name: cloud-api
+  memory: 1024M
+  disk_quote: 1024M
+  path: ./
+  buildpack: nodejs_buildpack_current
