@@ -11,7 +11,6 @@ const AzureRest = require('ms-rest-azure');
 
 const msRestManager = require('../../utilities/msRest');
 
-const azure_sdk = require('azure');
 const AWS = require('aws-sdk');
 
 
@@ -112,6 +111,30 @@ router.get('/aws', function(req, res, next) {
         res.json(ins);
       });
     }
+    })
+});
+
+router.get('/aws/count', function(req, res, next) {
+
+    AWS.config.credentials = new AWS.Credentials(process.env.AWS_ACCESS_KEY, process.env.AWS_SECRET_ACCESS_KEY, null);
+    AWS.config.update({region: 'us-east-2'});
+
+    // Create EC2 service object
+    var ec2 = new AWS.EC2({apiVersion: '2016-11-15'});
+    const params = {
+        DryRun: false
+    };
+
+    var counter = 0;
+    ec2.describeRegions(params, function(err, data) {
+        counter = counter +1;
+        if (err) {
+            console.log("Error", err.stack);
+        } else {
+            const regions = data.Regions;
+            counter = counter + regions.length;
+            res.json(counter);
+        }
     })
 });
 module.exports = router;
